@@ -1,3 +1,7 @@
 import pandas as pd
 
-loans = pd.read_csv("loan_payments.csv", index_col=0)
+def load_data():
+    loans = pd.read_csv("loan_payments.csv", index_col=0)
+    return loans
+
+load_data()
