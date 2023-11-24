@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_credentials():
-'''This function reads the credentials file, returning a dictionary'''
+    '''This function reads the credentials file, returning a dictionary'''
     with open("credentials.yaml", "r") as file:
         credentials = yaml.safe_load(file)
         return credentials
