@@ -37,7 +37,7 @@
 - **last_payment_amount**: Last total payment amount received - *good float64*
 - **next_payment_date**: Next scheduled payment date - *changed from "Mon-YYYY" to YYYY-MM string (still object), could be better as datetime64 - to review*
 - **last_credit_pull_date**: The most recent month LC pulled credit for this loan - *changed from "Mon-YYYY" to YYYY-MM string (still object), could be better as datetime64 - to review*
-- **collections_12_mths_ex_med**: Number of collections in 12 months excluding medical collections - *fine, float64. Cannot be int due to NaN entries. Change to int64 is NaN dropped.*
+- **collections_12_mths_ex_med**: Number of collections in 12 months excluding medical collections - *fine, float64. Cannot be int due to NaN entries. Change to int64 if NaN dropped.*
 - **mths_since_last_major_derog**: Months since most recent 90-day or worse rating - - *changed from float64 to timedelta64*
 - **policy_code**: publicly available policy_code=1 new products not publicly available policy_code=2 - *all same code (1)*
 - **application_type**: Indicates whether the loan is an individual application or a joint application with two co-borrowers - *all individual*
