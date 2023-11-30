@@ -10,7 +10,8 @@ class DataFrameInfo():
     def percent_na(self):
         pd.set_option("display.precision", 2)
         missing_values = ((self.data.isnull().mean()).round(4)) * 100
-        print("Column               Missing values (%) \n", missing_values)
+        missing_values_only = missing_values[missing_values > 0]
+        print("Column               Missing values (%) \n", missing_values_only)
 
     def shape(self):
         shape = self.data.shape
