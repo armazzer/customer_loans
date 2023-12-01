@@ -20,8 +20,8 @@ class DataTransform:
     def to_date(self, date_format):
         self.date_format = date_format
         self.series = pd.to_datetime(self.series, format=date_format)
-        # Format the result as ISO dates with month precision
-        # self.series = self.series.dt.strftime("%Y-%m")
+        # Format the result as ISO dates with seconds precision
+        self.series = self.series.astype('datetime64[s]')
         return self
     
     def to_timedelta(self):
