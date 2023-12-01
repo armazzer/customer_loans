@@ -21,7 +21,7 @@ class DataTransform:
         self.date_format = date_format
         self.series = pd.to_datetime(self.series, format=date_format)
         # Format the result as ISO dates with month precision
-        self.series = self.series.dt.strftime("%Y-%m")
+        # self.series = self.series.dt.strftime("%Y-%m")
         return self
     
     def to_timedelta(self):
