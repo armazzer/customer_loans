@@ -40,8 +40,8 @@ class DataTransform:
         self.series = pd.to_numeric(self.series, errors='coerce')
         return self
     
-    def round(self):
-        self.series = self.series.round(0)
+    def round(self, n):
+        self.series = self.series.round(n)
         return self
     
     def to_int(self):
@@ -51,6 +51,10 @@ class DataTransform:
 
     def split_value(self):
         self.series = self.series.apply(lambda x: x.split()[0] if isinstance(x, str) else x)
+        return self
+    
+    def replace_values(self, replacement_dict):
+        self.series = self.series.replace(replacement_dict)
         return self
 
 # Convert series 'grade' to category datatype. 
@@ -62,7 +66,7 @@ loans = loans.drop(columns=["grade_cat"])
 # From series "term": remove 'months' part of string and convert to numeric datatype.
 transform_term = DataTransform(loans["term"])
 # Create as new column
-loans["term_months"] = transform_term.split_value().to_num().round().return_series()
+loans["term_months"] = transform_term.split_value().to_num().round(0).return_series()
 # Replace original column
 loans["term"] = loans["term_months"]
 # Remove redundant column
@@ -75,12 +79,15 @@ subgrade_transform = DataTransform(loans["sub_grade"])
 subgrade_cat = subgrade_transform.to_category().return_series()
 loans["sub_grade"] = subgrade_cat
 
-# Convert 'employment_length' from object to category datatype. 
-# Would prefer to drop years and make ordinal, but values are awkward.
+# Convert 'employment_length' from object to float datatype. 
+# Initially remove "years" from string object, then replace "10+" with "10" and "<"" with "0" ("<"" was originally "< 1 year").
+# Finally, convert to numeric. 
+# Replace original column and change column name to refect data. 
 employment_length_transform = DataTransform(loans["employment_length"])
-employment_length_years = employment_length_transform.to_category().return_series()
+replacement_dict = {"10+": "10", "<": "0"}
+employment_length_years = employment_length_transform.split_value().replace_values(replacement_dict).to_num().return_series()
 loans["employment_length"] = employment_length_years
-loans.rename(columns={"employment_length": "employment_years"}, inplace=True)
+loans.rename(columns={"employment_length": "employment_min_years"}, inplace=True)
 
 # Convert 'home_ownership' from object to category
 home_ownership_transform = DataTransform(loans["home_ownership"])
