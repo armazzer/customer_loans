@@ -19,6 +19,10 @@ class DataFrameInfo():
          missing_count_only = missing_count[missing_count > 0]
          print("Column                Missing values \n", missing_count_only)
 
+    def value_counts_pct(self, column):
+        pct_value_counts = self.data[column].value_counts()/len(self.data[column].dropna()) * 100
+        print("Value              Count(%) \n", pct_value_counts)
+
     def shape(self):
         shape = self.data.shape
         print(f"The shape of the dataframe or array is: {shape}")
