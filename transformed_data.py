@@ -110,21 +110,21 @@ earliest_credit_line_iso = earliest_credit_line_transform.to_date("%b-%Y").retur
 loans["earliest_credit_line"] = earliest_credit_line_iso
 
 # Convert 'mths_since_last_delinq' from float to timedelta.
-msld_transform = DataTransform(loans["mths_since_last_delinq"])
-msld_timedelta = msld_transform.to_timedelta().return_series()
-loans["mths_since_last_delinq"] = msld_timedelta
+# msld_transform = DataTransform(loans["mths_since_last_delinq"])
+# msld_timedelta = msld_transform.to_timedelta().return_series()
+# loans["mths_since_last_delinq"] = msld_timedelta
 
 # Convert 'mths_since_last_record' from float to timedelta.
 mslr_transform = DataTransform(loans["mths_since_last_record"])
 mslr_timedelta = mslr_transform.to_timedelta().return_series()
 loans["mths_since_last_record"] = mslr_timedelta
 
-# Convert 'last_payment_date' from object to datetime64, format as date string YYYY-MM.
+# Convert 'last_payment_date' from object to datetime64[s].
 last_payment_date_transform = DataTransform(loans["last_payment_date"])
 last_payment_iso = last_payment_date_transform.to_date("%b-%Y").return_series()
 loans["last_payment_date"] = last_payment_iso
 
-# Convert 'next_payment_date' from object to datetime64, format as date string YYYY-MM.
+# Convert 'next_payment_date' from object to datetime64[s].
 next_payment_date_transform = DataTransform(loans["next_payment_date"])
 next_payment_iso = next_payment_date_transform.to_date("%b-%Y").return_series()
 loans["next_payment_date"] = next_payment_iso
