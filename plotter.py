@@ -34,8 +34,8 @@ class Plotter:
         #model = sm.OLS(self.data[y], sm.add_constant(self.data[x])).fit()
         #plt.text(1.5, 5, f"Y = {model.params[0]:.2f} + {model.params[1]:.2f}X\nR-squared = {model.rsquared:.2f}", fontsize=10)
 
-    def histogram(self, column, bins):
-        self.ax = sns.histplot(self.data[column], bins=bins, kde=True)
+    def histogram(self, column, bins, kde=True):
+        self.ax = sns.histplot(self.data[column], bins=bins, kde=kde)
         return self
         
     def format_hist(self, x_rot, num_labels):
