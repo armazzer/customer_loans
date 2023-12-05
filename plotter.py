@@ -51,6 +51,7 @@ class Plotter:
         # D’Agostino’s K^2 Test
         stat, p = normaltest(data, nan_policy='omit')
         print('K^2 test statistic = %.3f, p = %.3f' % (stat, p))
+        return round(stat, 2)
 
     def dpd_plot(self, column, x_rot):
         probabilities = self.data[column].value_counts(normalize=True)
