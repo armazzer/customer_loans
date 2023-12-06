@@ -34,23 +34,25 @@ class Plotter:
         #model = sm.OLS(self.data[y], sm.add_constant(self.data[x])).fit()
         #plt.text(1.5, 5, f"Y = {model.params[0]:.2f} + {model.params[1]:.2f}X\nR-squared = {model.rsquared:.2f}", fontsize=10)
 
-    def histogram(self, column, bins, kde=True):
+    def histogram(self, column, bins=20, kde=True):
         self.ax = sns.histplot(self.data[column], bins=bins, kde=kde)
         return self
         
-    def format_hist(self, x_rot, num_labels):
+    def format_hist(self, x_rot=45, num_labels=20):
         self.ax.tick_params(axis='x', rotation=x_rot)
         self.ax.xaxis.set_major_locator(plt.MaxNLocator(num_labels))
+        plt.show()
         #return self
     
     def qq_plot(self, column):
         qqplot(self.data[column], scale=1, line='q')
+        plt.show()
 
     def k2_test(self, column):
         data = self.data[column]
         # D’Agostino’s K^2 Test
         stat, p = normaltest(data, nan_policy='omit')
-        print('K^2 test statistic = %.3f, p = %.3f' % (stat, p))
+        print(f"{column}:", "K^2 test statistic = %.3f, p = %.3f" % (stat, p))
         return round(stat, 2)
 
     def dpd_plot(self, column, x_rot):
