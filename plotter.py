@@ -60,3 +60,30 @@ class Plotter:
         dpd = sns.barplot(y=probabilities.values, x=probabilities.index)
         plt.ylabel("Probability")
         plt.xticks(rotation=x_rot)
+
+    def bar_plot(self, columns, y_label, w, h):
+        fig, ax1 = plt.subplots(figsize=(w, h))
+        self.data[columns].plot(kind='bar', ax=ax1, width=0.5)
+        ax1.set_ylabel(y_label)
+        ax1.tick_params(axis='y')
+        fig.tight_layout()
+
+    def bar_plot_twin_y(self, column_a, column_b, y_left, y_right, w, h):
+        fig, ax1 = plt.subplots(figsize=(w, h))
+
+        color1 = 'tab:blue'
+        self.data[column_a].plot(kind='bar', ax=ax1, width=0.5, position=1, color=color1)
+        ax1.set_ylabel(y_left, color=color1)
+        ax1.tick_params(axis='y', labelcolor=color1)
+        #ax1.set_ylim(bottom=-2.5) need to work out default values for these
+        #ax1.set_ylim(top=35)
+
+        ax2 = ax1.twinx()
+        color2 = 'tab:red'
+        self.data[column_b].plot(kind='bar', ax=ax2, width=0.5, position=0, color=color2)
+        ax2.set_ylabel(y_right, color=color2)
+        ax2.tick_params(axis='y', labelcolor=color2)
+        #ax2.set_ylim(bottom=-25000)
+        #ax2.set_ylim(top=350000)
+
+        fig.tight_layout()
