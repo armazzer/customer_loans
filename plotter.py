@@ -54,6 +54,13 @@ class Plotter:
         stat, p = normaltest(data, nan_policy='omit')
         print(f"{column}:", "K^2 test statistic = %.3f, p = %.3f" % (stat, p))
         return round(stat, 2)
+    
+    def skew_test(self, column):
+        data = self.data[column]
+        skew = data.skew()
+        skew = round(skew, 3)
+        print(f"{column}: skew = {skew}")
+        return skew
 
     def dpd_plot(self, column, x_rot):
         probabilities = self.data[column].value_counts(normalize=True)
@@ -85,5 +92,29 @@ class Plotter:
         ax2.tick_params(axis='y', labelcolor=color2)
         #ax2.set_ylim(bottom=-25000)
         #ax2.set_ylim(top=350000)
-
         fig.tight_layout()
+
+
+# Create class that inherits from Plotter
+
+class SkewChecker(Plotter):
+   def __init__ (self, data):
+        super().__init__(data)
+        self.skew_dict = {}
+        self.k2_dict = {} 
+
+   def skew_check(self, column, bins=20, kde=True, rot=45, num_labels=20):
+        skew = self.skew_test(column)
+        self.skew_dict[column] = skew
+        k2 = self.k2_test(column)
+        self.k2_dict[column] = k2
+        self.histogram(column, bins, kde).format_hist(rot, num_labels)
+        self.qq_plot(column)
+
+   def show_skew_dict(self):
+        print(self.skew_dict)
+        return(self.skew_dict)
+   
+   def show_k2_dict(self):
+        print(self.k2_dict)
+        return(self.k2_dict)
