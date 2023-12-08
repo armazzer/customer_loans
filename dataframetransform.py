@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from scipy.stats import boxcox
 
 import transformed_data as data
 import dataframeinfo as info
@@ -56,6 +58,18 @@ class DataFrameTransform:
 
     def drop_columns(self, columns):
         self.data = self.data.drop(columns, axis=1, inplace=True)
+
+    def add_constant(self, columns, constant):
+        self.data.loc[:, columns] += constant
+
+    def box_cox_transform(self, column):
+        transformed_values, lambda_value = boxcox(self.data[column])
+        self.data[column] = transformed_values
+        if __name__ == "__main__":
+            print(lambda_value)
+
+    def log_transform(self, columns):
+        self.data[columns] = self.data[columns].map(lambda x: np.log(x) if x > 0 else 0)
 
 
 class DataFrameSliceTransform:
@@ -124,3 +138,26 @@ if __name__ == "__main__":
     loans_plots_cleaned = plots.Plotter(loans)
     # Show heatmap of all all data/missing values. 
     print(loans_plots_cleaned.heatmap(14, 10))
+
+
+# TRANSFORM SKEWED COLUMNS
+
+# Box-Cox transform
+# Create a copy of the dataframe.
+loans_box_cox = loans.copy()
+# Create new instance of the DataFrameTransform class
+loans_transform = DataFrameTransform(loans_box_cox)
+# List coluns to apply the Box-Cox transformation to.
+cols_to_transform = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'instalment', 'annual_inc', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
+# Identify subgroup of columns that contain zeroes.
+zero_cols = loans.columns[(loans == 0).any()]
+zero_cols = list(zero_cols) # All zero-containing columns in the dataframe.
+cols_add_constant = [col for col in cols_to_transform if col in zero_cols] # Columns for transformation that contain zeroes. 
+# Add constant to zero-containing columns.
+loans_transform.add_constant(cols_add_constant, 1)
+# Run transformation
+for col in cols_to_transform:
+    loans_transform.box_cox_transform(col)
+
+# Log transformation
+loans_transform.log_transform('inq_last_6mths')
