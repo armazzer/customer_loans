@@ -2,6 +2,7 @@
 import missingno as msno
 import seaborn as sns
 import matplotlib.pyplot as plt
+import plotly_express as px
 from scipy.stats import normaltest
 from statsmodels.graphics.gofplots import qqplot
 
@@ -25,8 +26,10 @@ class Plotter:
         plt.figure(figsize=(w, h))
         sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
 
-    def scatter(self, x, y):
-        sns.scatterplot(data=self.data, x=x, y=y)
+    def scatter(self, x, y, hue=None, loc="upper left"):
+        sns.scatterplot(data=self.data, x=x, y=y, hue=hue)
+        plt.legend(loc=loc, title=hue)
+        plt.show()
 
     def scatter_reg(self, x, y):
         sns.regplot(data=self.data, x=x, y=y, scatter_kws={'s': 10}, line_kws={'color': 'red'})
@@ -94,6 +97,15 @@ class Plotter:
         #ax2.set_ylim(top=350000)
         fig.tight_layout()
 
+    def box_plot(self, column, w, h):
+        plt.figure(figsize=(w, h))
+        sns.boxplot(y=self.data[column], color='lightgreen', showfliers=True)
+        plt.title(f'Box plot of {column}')
+        plt.show()
+
+    def box_plot_px(self, column, points, w, h):
+        fig = px.box(self.data[column], y=column , points=points, width=w, height=h)
+        fig.show()
 
 # Create class that inherits from Plotter
 
