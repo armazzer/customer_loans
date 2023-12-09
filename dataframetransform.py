@@ -148,7 +148,7 @@ loans_box_cox = loans.copy()
 # Create new instance of the DataFrameTransform class
 loans_transform = DataFrameTransform(loans_box_cox)
 # List coluns to apply the Box-Cox transformation to.
-cols_to_transform = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'instalment', 'annual_inc', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
+cols_to_transform = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'instalment', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
 # Identify subgroup of columns that contain zeroes.
 zero_cols = loans.columns[(loans == 0).any()]
 zero_cols = list(zero_cols) # All zero-containing columns in the dataframe.
@@ -160,4 +160,5 @@ for col in cols_to_transform:
     loans_transform.box_cox_transform(col)
 
 # Log transformation
+loans_transform.log_transform('annual_inc')
 loans_transform.log_transform('inq_last_6mths')
