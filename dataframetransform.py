@@ -85,7 +85,7 @@ class DataFrameSliceTransform:
     def return_series(self, column):
         return self.data[column]  
 
-
+# CHANGE THIS SECTION ("LOANS_CLEANING") INTO A FUNCTION WHEN YOU HAVE TIME LATER. 
 # Create instance of the DataFrameTransform class. 
 loans_cleaning = DataFrameTransform(loans)
 
@@ -141,24 +141,53 @@ if __name__ == "__main__":
 
 
 # TRANSFORM SKEWED COLUMNS
+cols_to_transform_box = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'instalment', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
+cols_to_transform_log = ['annual_inc', 'inq_last_6mths']
 
-# Box-Cox transform
-# Create a copy of the dataframe.
-loans_box_cox = loans.copy()
-# Create new instance of the DataFrameTransform class
-loans_transform = DataFrameTransform(loans_box_cox)
-# List coluns to apply the Box-Cox transformation to.
-cols_to_transform = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'instalment', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
-# Identify subgroup of columns that contain zeroes.
-zero_cols = loans.columns[(loans == 0).any()]
-zero_cols = list(zero_cols) # All zero-containing columns in the dataframe.
-cols_add_constant = [col for col in cols_to_transform if col in zero_cols] # Columns for transformation that contain zeroes. 
-# Add constant to zero-containing columns.
-loans_transform.add_constant(cols_add_constant, 1)
-# Run transformation
-for col in cols_to_transform:
-    loans_transform.box_cox_transform(col)
+def transform_copy(dataframe, columns_box=None, columns_log=None):
+    # Create a copy of the dataframe.
+    loans_transformed = dataframe.copy()
+    # Create new instance of the DataFrameTransform class
+    loans_transform = DataFrameTransform(loans_transformed)
+    # Box-Cox transform
+    # For columns to apply the Box-Cox transformation to:
+    # Identify subgroup of columns that contain zeroes.
+    zero_cols = dataframe.columns[(dataframe == 0).any()]
+    zero_cols = list(zero_cols) # All zero-containing columns in the dataframe.
+    cols_add_constant = [col for col in columns_box if col in zero_cols] # Columns for transformation that contain zeroes. 
+    # Add constant to zero-containing columns.
+    loans_transform.add_constant(cols_add_constant, 1)
+    # Run transformation on all required columns.
+    for col in columns_box:
+        loans_transform.box_cox_transform(col)
 
-# Log transformation
-loans_transform.log_transform('annual_inc')
-loans_transform.log_transform('inq_last_6mths')
+    # Log transformation
+    for col in columns_log:
+        loans_transform.log_transform(col)
+
+    return loans_transformed
+
+
+def transform_original(dataframe, columns_box=None, columns_log=None):
+    # Create a copy of the dataframe.
+    loans_transformed = dataframe
+    # Create new instance of the DataFrameTransform class
+    loans_transform = DataFrameTransform(loans_transformed)
+    # Box-Cox transform
+    # For columns to apply the Box-Cox transformation to:
+    # Identify subgroup of columns that contain zeroes.
+    zero_cols = dataframe.columns[(dataframe == 0).any()]
+    zero_cols = list(zero_cols) # All zero-containing columns in the dataframe.
+    cols_add_constant = [col for col in columns_box if col in zero_cols] # Columns for transformation that contain zeroes. 
+    # Add constant to zero-containing columns.
+    loans_transform.add_constant(cols_add_constant, 1)
+    # Run transformation on all required columns.
+    for col in columns_box:
+        loans_transform.box_cox_transform(col)
+
+    # Log transformation
+    for col in columns_log:
+        loans_transform.log_transform(col)
+
+    # return loans_transformed
+    
