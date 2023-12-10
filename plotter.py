@@ -1,4 +1,6 @@
 
+import dataframeinfo as info    # May want to use some methods from this
+import numpy as np
 import missingno as msno
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -97,7 +99,7 @@ class Plotter:
         #ax2.set_ylim(top=350000)
         fig.tight_layout()
 
-    def box_plot(self, column, w, h):
+    def box_plot(self, column, w=2.5, h=3):
         plt.figure(figsize=(w, h))
         sns.boxplot(y=self.data[column], color='lightgreen', showfliers=True)
         plt.title(f'Box plot of {column}')
@@ -130,3 +132,29 @@ class SkewChecker(Plotter):
    def show_k2_dict(self):
         print(self.k2_dict)
         return(self.k2_dict)
+   
+   # Create another class that inherits from Plotter
+
+class PlotStats(Plotter):
+    def __init__ (self, data):
+        super().__init__(data)
+        self.quantiles_dict = {}
+
+    def quantiles(self, column):
+        # Box plot
+        self.box_plot(column)
+        # Calculate IQR
+        num_types = ["int64", "float64"]
+        Q1 = round((np.percentile(self.data[column], 25)), 3) if self.data[column].dtypes in num_types else np.percentile(self.data[column], 25)
+        Q3 = round((np.percentile(self.data[column], 75)), 3) if self.data[column].dtypes in num_types else np.percentile(self.data[column], 75)
+        IQR = round((Q3 - Q1), 3) if self.data[column].dtypes in num_types else Q1 - Q3
+        # Calculate Whiskers
+        lower_whisker = round((Q1 - 1.5 * IQR), 3) if self.data[column].dtypes in num_types else Q1 - 1.5 * IQR
+        upper_whisker = round((Q3 + 1.5 * IQR), 3) if self.data[column].dtypes in num_types else Q1 + 1.5 * IQR
+        quantiles_dict_col = {"Q1": Q1, "Q3": Q3, "IQR": IQR, "lower_whisker": lower_whisker, "upper_whisker": upper_whisker}
+        self.quantiles_dict[column] = quantiles_dict_col
+        print(f"{column}: {quantiles_dict_col}")
+
+    def show_quantiles(self):
+        print(self.quantiles_dict)
+        return(self.quantiles_dict)
