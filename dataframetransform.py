@@ -29,6 +29,7 @@ if __name__ == "__main__":
 class DataFrameTransform:
     def __init__ (self, data):
         self.data = data
+        self.quantiles_dict = {}
 
     def calc_corr(self, col_y, col_x):
         correlation = self.data[col_y].corr(self.data[col_x])
@@ -70,6 +71,23 @@ class DataFrameTransform:
 
     def log_transform(self, columns):
         self.data[columns] = self.data[columns].map(lambda x: np.log(x) if x > 0 else 0)
+
+    def quantiles_calc(self, column):
+         # Calculate IQR
+        num_types = ["int64", "float64"]
+        Q1 = round((np.percentile(self.data[column], 25)), 3) if self.data[column].dtypes in num_types else np.percentile(self.data[column], 25)
+        Q3 = round((np.percentile(self.data[column], 75)), 3) if self.data[column].dtypes in num_types else np.percentile(self.data[column], 75)
+        IQR = round((Q3 - Q1), 3) if self.data[column].dtypes in num_types else Q1 - Q3
+        # Calculate Whiskers
+        lower_whisker = round((Q1 - 1.5 * IQR), 3) if self.data[column].dtypes in num_types else Q1 - 1.5 * IQR
+        upper_whisker = round((Q3 + 1.5 * IQR), 3) if self.data[column].dtypes in num_types else Q1 + 1.5 * IQR
+        quantiles_dict_col = {"Q1": Q1, "Q3": Q3, "IQR": IQR, "lower_whisker": lower_whisker, "upper_whisker": upper_whisker}
+        self.quantiles_dict[column] = quantiles_dict_col
+        print(f"{column}: {quantiles_dict_col}")
+
+    def show_quantiles(self):
+        print(self.quantiles_dict)
+        return(self.quantiles_dict)
 
 
 class DataFrameSliceTransform:
@@ -189,5 +207,8 @@ def transform_original(dataframe, columns_box=None, columns_log=None):
     for col in columns_log:
         loans_transform.log_transform(col)
 
-    # return loans_transformed
-    
+
+if __name__ == "__main__":
+    transform_original(loans, cols_to_transform_box, cols_to_transform_log)
+    modified_cols = cols_to_transform_box + cols_to_transform_log
+    print(loans[modified_cols].head(4))
