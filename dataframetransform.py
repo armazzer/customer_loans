@@ -212,3 +212,40 @@ if __name__ == "__main__":
     transform_original(loans, cols_to_transform_box, cols_to_transform_log)
     modified_cols = cols_to_transform_box + cols_to_transform_log
     print(loans[modified_cols].head(4))
+
+
+def remove_outliers_copy(loans): # "loans" could be any dataframe, was going to take ages to change everything to "dataframe" below.
+# Generate K2 dict.
+    non_cat_types = ["int64", "float64", "datetime64[s]"]
+    non_cat_columns = [col for col in loans.columns if loans[col].dtypes in non_cat_types]
+    cols_to_exclude = ["id", "member_id", "policy_code", "application_type", "term_months"]
+    columns_to_plot = [item for item in non_cat_columns if item not in cols_to_exclude]
+    # Create instance of the SkewChecker class. Run skew checks. Would preferably not generate all the plots here, but the method was already defined with plots in SkewCheck. 
+    loans_skew = plots.SkewChecker(loans)
+    for col in columns_to_plot:
+        num_types = ["int64", "float64"]
+        if loans[col].dtypes in num_types: 
+            loans_skew.skew_check(col)
+    loans_k2_dict = loans_skew.show_k2_dict()
+ 
+# Generate list of columns to remove outliers from.
+    cols_drop_outliers = [col for col in columns_to_plot if "date" not in col and "earliest" not in col and loans_k2_dict[col] < 2000]
+    print(cols_drop_outliers)
+    print(len(cols_drop_outliers))
+    # cols_drop_outliers = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'int_rate', 'instalment', 'annual_inc', 'dti', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
+
+# Generate quantiles_dict.
+    loans_calcs = DataFrameTransform(loans)
+    for col in columns_to_plot:
+        loans_calcs.quantiles_calc(col)
+    quantiles_dict = loans_calcs.show_quantiles() # Not sure how/why quantiles_dict is not accessed.
+    
+# Copy dataframe.
+    loans_copy = loans.copy()
+
+# Remove outliers
+    for col in cols_drop_outliers:
+        loans_copy = loans_copy[loans_copy[col] >= quantiles_dict[col]["lower_whisker"]]
+        loans_copy = loans_copy[loans_copy[col] <= quantiles_dict[col]["upper_whisker"]]
+
+    return loans_copy
