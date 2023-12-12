@@ -22,11 +22,16 @@ class Plotter:
         plt.title('Missing Data Heatmap')
         plt.show()
     
-    def correlation(self, w, h):
+    def corr_calc(self):
         numeric_cols = self.data.select_dtypes(include=["int64", "float64"])
         correlation_matrix = numeric_cols.corr()
+        return correlation_matrix
+
+    def correlation(self, w, h):
+        correlation_matrix = self.corr_calc()
         plt.figure(figsize=(w, h))
         sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
+        plt.show()
 
     def scatter(self, x, y, hue=None, loc="upper left"):
         sns.scatterplot(data=self.data, x=x, y=y, hue=hue)
