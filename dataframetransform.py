@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import boxcox
+from scipy.stats import normaltest
 
 import transformed_data as data
 import dataframeinfo as info
@@ -30,7 +31,18 @@ class DataFrameTransform:
     def __init__ (self, data):
         self.data = data
         self.quantiles_dict = {}
+        self.k2_dict = {}
 
+    def k2_calc(self, column):
+        data = self.data[column]
+        # D’Agostino’s K^2 Test
+        stat, p = normaltest(data, nan_policy='omit')
+        k2 = round(stat, 2)
+        self.k2_dict[column] = k2
+
+    def return_k2(self):
+        return self.k2_dict
+    
     def calc_corr_matrix(self):
         numeric_cols = self.data.select_dtypes(include=["int64", "float64"])
         correlation_matrix = numeric_cols.corr()
@@ -88,7 +100,8 @@ class DataFrameTransform:
         upper_whisker = round((Q3 + 1.5 * IQR), 3) if self.data[column].dtypes in num_types else Q1 + 1.5 * IQR
         quantiles_dict_col = {"Q1": Q1, "Q3": Q3, "IQR": IQR, "lower_whisker": lower_whisker, "upper_whisker": upper_whisker}
         self.quantiles_dict[column] = quantiles_dict_col
-        print(f"{column}: {quantiles_dict_col}")
+        if __name__ == "__main__":
+            print(f"{column}: {quantiles_dict_col}")
 
     def show_quantiles(self):
         #print(self.quantiles_dict)
@@ -222,36 +235,40 @@ if __name__ == "__main__":
     modified_cols = cols_to_transform_box + cols_to_transform_log
     print(loans[modified_cols].head(4))
 
+def true_num_cols(loans):
+    all_cols = loans.columns
+    non_cat_types = ["int64", "float64", "datetime64[s]"]
+    non_cat_cols = [col for col in all_cols if loans[col].dtypes in non_cat_types]
+    cols_to_exclude = ["id", "member_id", "policy_code", "application_type", "term_months"]
+    true_num_cols = [item for item in non_cat_cols if item not in cols_to_exclude]
+    return true_num_cols
 
 def remove_outliers_copy(loans): # "loans" could be any dataframe, was going to take ages to change everything to "dataframe" below.
-    # Generate K2 dict.
-    non_cat_types = ["int64", "float64", "datetime64[s]"]
-    non_cat_columns = [col for col in loans.columns if loans[col].dtypes in non_cat_types]
-    cols_to_exclude = ["id", "member_id", "policy_code", "application_type", "term_months"]
-    columns_to_plot = [item for item in non_cat_columns if item not in cols_to_exclude]
-    # Create instance of the SkewChecker class. Run skew checks. Would preferably not generate all the plots here, but the method was already defined with plots in SkewCheck. 
-    loans_skew = plots.SkewChecker(loans)
-    for col in columns_to_plot:
+    # First create instance of the DataFrameTransform class and generate K2 dict.
+    columns_to_test = true_num_cols(loans)
+    loans_test = DataFrameTransform(loans)
+    for col in columns_to_test:
         num_types = ["int64", "float64"]
         if loans[col].dtypes in num_types: 
-            loans_skew.skew_check(col)
-    loans_k2_dict = loans_skew.show_k2_dict()
+            loans_test.k2_calc(col)
+    loans_k2_dict = loans_test.return_k2()
  
     # Generate list of columns to remove outliers from.
-    cols_drop_outliers = [col for col in columns_to_plot if "date" not in col and "earliest" not in col and loans_k2_dict[col] < 2000]
-    print(cols_drop_outliers)
-    print(len(cols_drop_outliers))
-    # cols_drop_outliers = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'int_rate', 'instalment', 'annual_inc', 'dti', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
+    cols_drop_outliers = [col for col in columns_to_test if "date" not in col and "earliest" not in col and loans_k2_dict[col] < 2000]
+    if __name__ == "__main__":
+        print(cols_drop_outliers)
+        print(len(cols_drop_outliers))
+        # cols_drop_outliers = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'int_rate', 'instalment', 'annual_inc', 'dti', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
 
     # Generate quantiles_dict.
     loans_calcs = DataFrameTransform(loans)
-    for col in columns_to_plot:
+    for col in columns_to_test:
         loans_calcs.quantiles_calc(col)
     quantiles_dict = loans_calcs.show_quantiles() # Not sure how/why quantiles_dict is not accessed.
     
     # Copy dataframe.
     loans_copy = loans.copy()
-
+    
     # Remove outliers
     for col in cols_drop_outliers:
         loans_copy = loans_copy[loans_copy[col] >= quantiles_dict[col]["lower_whisker"]]
@@ -261,28 +278,25 @@ def remove_outliers_copy(loans): # "loans" could be any dataframe, was going to 
 
 
 def remove_outliers_original(loans): # "loans" could be any dataframe, was going to take ages to change everything to "dataframe" below.
-    # Generate K2 dict.
-    non_cat_types = ["int64", "float64", "datetime64[s]"]
-    non_cat_columns = [col for col in loans.columns if loans[col].dtypes in non_cat_types]
-    cols_to_exclude = ["id", "member_id", "policy_code", "application_type", "term_months"]
-    columns_to_plot = [item for item in non_cat_columns if item not in cols_to_exclude]
-    # Create instance of the SkewChecker class. Run skew checks. Would preferably not generate all the plots here, but the method was already defined with plots in SkewCheck. 
-    loans_skew = plots.SkewChecker(loans)
-    for col in columns_to_plot:
+    # First create instance of the DataFrameTransform class and generate K2 dict.
+    columns_to_test = true_num_cols(loans)
+    loans_test = DataFrameTransform(loans)
+    for col in columns_to_test:
         num_types = ["int64", "float64"]
         if loans[col].dtypes in num_types: 
-            loans_skew.skew_check(col)
-    loans_k2_dict = loans_skew.show_k2_dict()
+            loans_test.k2_calc(col)
+    loans_k2_dict = loans_test.return_k2()
  
     # Generate list of columns to remove outliers from.
-    cols_drop_outliers = [col for col in columns_to_plot if "date" not in col and "earliest" not in col and loans_k2_dict[col] < 2000]
-    print(cols_drop_outliers)
-    print(len(cols_drop_outliers))
-    # cols_drop_outliers = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'int_rate', 'instalment', 'annual_inc', 'dti', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
+    cols_drop_outliers = [col for col in columns_to_test if "date" not in col and "earliest" not in col and loans_k2_dict[col] < 2000]
+    if __name__ == "__main__":
+        print(cols_drop_outliers)
+        print(len(cols_drop_outliers))
+        # cols_drop_outliers = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'int_rate', 'instalment', 'annual_inc', 'dti', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
 
     # Generate quantiles_dict.
     loans_calcs = DataFrameTransform(loans)
-    for col in columns_to_plot:
+    for col in columns_to_test:
         loans_calcs.quantiles_calc(col)
     quantiles_dict = loans_calcs.show_quantiles() # DON'T KNNOW WHY/HOW THIS WAS NOT ACCESSED.
 
