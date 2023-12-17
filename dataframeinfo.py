@@ -1,7 +1,7 @@
 import pandas as pd
-import transformed_data as data
+# import transformed_data as data
 
-loans = data.loans
+# loans = data.loans
 
 class DataFrameInfo():
     def __init__(self, data):
