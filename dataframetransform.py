@@ -125,7 +125,10 @@ class DataFrameSliceTransform:
     def return_series(self, column):
         return self.data[column]  
 
+# HANDLE MISSING VALUES.
+    
 # CHANGE THIS SECTION ("LOANS_CLEANING") INTO A FUNCTION WHEN YOU HAVE TIME LATER. 
+    
 # Create instance of the DataFrameTransform class. 
 loans_cleaning = DataFrameTransform(loans)
 
@@ -137,7 +140,7 @@ loans_cleaning.corr_impute("funded_amount", "loan_amount")
 
 # Create condition for slicing term_months.
 condition = loans["total_rec_int"] < 13619.26
-# Run impute on term_months slice based on condition of total_rec_int and required value for that coddition/slice. Return result as a new series. 
+# Run impute on term_months slice based on condition of total_rec_int and required value for that condition/slice. Return result as a new series. 
 filled_slice = loans_slice_cleaning.conditional_impute("term_months", condition, 36.0).return_series("term_months")
 # Fill all remaining nulls of the new series (filled_slice) with the other value, 60.0.
 filled_slice = filled_slice.fillna(60.0)
@@ -181,6 +184,7 @@ if __name__ == "__main__":
 
 
 # TRANSFORM SKEWED COLUMNS
+    
 cols_to_transform_box = ['loan_amount', 'funded_amount', 'funded_amount_inv', 'instalment', 'open_accounts', 'total_accounts', 'total_payment', 'total_payment_inv', 'total_rec_prncp', 'total_rec_int', 'last_payment_amount']
 cols_to_transform_log = ['annual_inc', 'inq_last_6mths']
 
@@ -234,6 +238,12 @@ if __name__ == "__main__":
     transform_original(loans, cols_to_transform_box, cols_to_transform_log)
     modified_cols = cols_to_transform_box + cols_to_transform_log
     print(loans[modified_cols].head(4))
+
+
+# REMOVE OUTLIERS
+    
+# Below is a very coarse approach, removing all points outside the upper and lower whiskers of box plots, only in columns where the data distribution is relatively normal (K2 test). 
+# I wasn't sure how to identify outliners in a more refined way, and pretty much did not have time. 
 
 def true_num_cols(loans):
     all_cols = loans.columns
@@ -310,6 +320,8 @@ def remove_outliers_original(loans): # "loans" could be any dataframe, was going
 
     return loans_no_out
 
+
+# REMOVE COLLINEAR COLUMNS
 
 def drop_collinear(data):
     loans_drop_collinear = DataFrameTransform(data)
