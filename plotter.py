@@ -5,6 +5,7 @@ import missingno as msno
 import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly_express as px
+import statsmodels.api as sm
 from scipy.stats import normaltest
 from statsmodels.graphics.gofplots import qqplot
 
@@ -38,11 +39,11 @@ class Plotter:
         plt.legend(loc=loc, title=hue)
         plt.show()
 
-    def scatter_reg(self, x, y):
+    def scatter_reg(self, x, y, text_x=1, text_y=1):
         sns.regplot(data=self.data, x=x, y=y, scatter_kws={'s': 10}, line_kws={'color': 'red'})
         plt.gca().set_zorder(1) 
-        #model = sm.OLS(self.data[y], sm.add_constant(self.data[x])).fit()
-        #plt.text(1.5, 5, f"Y = {model.params[0]:.2f} + {model.params[1]:.2f}X\nR-squared = {model.rsquared:.2f}", fontsize=10)
+        model = sm.OLS(self.data[y], sm.add_constant(self.data[x])).fit()
+        plt.text(text_x, text_y, f"Y = {model.params[0]:.2f} + {model.params[1]:.3f}X\nR-squared = {model.rsquared:.3f}", fontsize=10)
 
     def histogram(self, column, bins=20, kde=True):
         self.ax = sns.histplot(self.data[column], bins=bins, kde=kde)
