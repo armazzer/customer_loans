@@ -89,6 +89,10 @@ class DataFrameTransform:
     def log_transform(self, columns):
         self.data[columns] = self.data[columns].map(lambda x: np.log(x) if x > 0 else 0)
 
+    def log_transform_ind_col(self, column):
+        log_column = self.data[column].map(lambda x: np.log(x) if x > 0 else 0)
+        return log_column
+
     def quantiles_calc(self, column):
          # Calculate IQR
         num_types = ["int64", "float64"]
