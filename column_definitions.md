@@ -14,13 +14,13 @@
 - **home_ownership**: The home ownership status provided by the borrower - *changed from object to category*
 - **annual_inc**: The annual income of the borrower - *good, float64*
 - **verification_status**: Indicates whether the borrowers income was verified by the LC or the income source was verified - good
-- **issue_date:** Issue date of the loan - *changed from "Mon-YYYY" to YYYY-MM string (still object), could be better as datetime64 - to review*
+- **issue_date:** Issue date of the loan - *changed from "Mon-YYYY" to datetime64*
 - **loan_status**: Current status of the loan - good
 - **payment_plan**: Indicates if a payment plan is in place for the loan. Indication borrower is struggling to pay. - *changed from object to category*
 - **purpose**: A category provided by the borrower for the loan request. - good
 - **dti**: A ratio calculated using the borrower's total monthly debt payments on the total debt obligations, excluding mortgage and the requested LC loan, divided by the borrower's self-reported monthly income. - *good, float64*
 - **delinq_2yr**: The number of 30+ days past-due payment in the borrower's credit file for the past 2 years. - *good int64*
-- **earliest_credit_line**: The month the borrower's earliest reported credit line was opened - *changed from "Mon-YYYY" to YYYY-MM string (still object), could be better as datetime64 - to review*
+- **earliest_credit_line**: The month the borrower's earliest reported credit line was opened - *changed from "Mon-YYYY" to datetime64*
 - **inq_last_6mths**: The number of inquiries in past 6 months (excluding auto and mortgage inquiries) - *good, int64*
 - **MISSING DEFINITION - mths_since_last_dlinq** - *changed from float64 to timedelta64*
 - **mths_since_last_record**: The number of months since the last public record. - *changed from float64 to timedelta64*
@@ -33,7 +33,7 @@
 - **total_rec_late_fee**: Late fees received to date - *good float64*
 - **recoveries**: post charge off gross recovery - *good float64*
 - **collection_recovery_fee**: post charge off collection fee - *good float64*
-- **last_payment_date**: Last month payment was received - *changed from "Mon-YYYY" to YYYY-MM string (still object), could be better as datetime64 - to review*
+- **last_payment_date**: Last month payment was received - *changed from "Mon-YYYY" to datetime64*
 - **last_payment_amount**: Last total payment amount received - *good float64*
 - **next_payment_date**: Next scheduled payment date - *changed from "Mon-YYYY" to YYYY-MM string (still object), could be better as datetime64 - to review*
 - **last_credit_pull_date**: The most recent month LC pulled credit for this loan - *changed from "Mon-YYYY" to YYYY-MM string (still object), could be better as datetime64 - to review*
