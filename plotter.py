@@ -1,10 +1,9 @@
-
-import dataframeinfo as info    # May want to use some methods from this
-import numpy as np
-import missingno as msno
-import seaborn as sns
 import matplotlib.pyplot as plt
+import missingno as msno
+import numpy as np
+import pandas as pd
 import plotly_express as px
+import seaborn as sns
 import statsmodels.api as sm
 from scipy.stats import normaltest
 from statsmodels.graphics.gofplots import qqplot
@@ -73,10 +72,22 @@ class Plotter:
         print(f"{column}: skew = {skew}")
         return skew
 
-    def dpd_plot(self, column, x_rot):
+    def dpd_plot(self, column, x_rot=0, legend=None):
         probabilities = self.data[column].value_counts(normalize=True)
-        dpd = sns.barplot(y=probabilities.values, x=probabilities.index)
+        sns.barplot(y=probabilities.values, x=probabilities.index)
         plt.ylabel("Probability")
+        plt.xticks(rotation=x_rot)
+
+    def dpd_multi_plot(self, columns, x_rot):
+        probabilities = self.data[columns].value_counts(normalize=True)
+        probabilities_df = pd.DataFrame(probabilities)
+        sns.barplot(probabilities_df, y="proportion", x=columns[0], hue=columns[1])
+        plt.ylabel("Probability")
+        plt.xticks(rotation=x_rot)
+
+    def sns_barplot(self, x_col, y_col, hue=None, x_rot=0):
+        sns.barplot(self.data, x=x_col, y=y_col, hue=hue)
+        plt.ylabel(y_col)
         plt.xticks(rotation=x_rot)
 
     def bar_plot(self, columns, y_label, w, h):
@@ -113,6 +124,10 @@ class Plotter:
 
     def box_plot_px(self, column, points, w, h):
         fig = px.box(self.data[column], y=column , points=points, width=w, height=h)
+        fig.show()
+
+    def box_plot_multi(self, columns, points, w, h):
+        fig = px.box(self.data[columns], y=columns , points=points, width=w, height=h)
         fig.show()
 
 # Create class that inherits from Plotter
