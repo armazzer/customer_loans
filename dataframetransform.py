@@ -131,7 +131,7 @@ class DataFrameSliceTransform:
 
 # HANDLE MISSING VALUES.
     
-# CHANGE THIS SECTION ("LOANS_CLEANING") INTO A FUNCTION WHEN YOU HAVE TIME LATER. 
+# IF I HAD TIME I WOULD CHANGE THIS SECTION ("LOANS_CLEANING") INTO A FUNCTION. 
     
 # Create instance of the DataFrameTransform class. 
 loans_cleaning = DataFrameTransform(loans)
@@ -314,7 +314,7 @@ def remove_outliers_original(loans): # "loans" could be any dataframe, was going
         loans_calcs.quantiles_calc(col)
     quantiles_dict = loans_calcs.show_quantiles() # DON'T KNNOW WHY/HOW THIS WAS NOT ACCESSED.
 
-     # Assign dataframe.
+    # Assign dataframe.
     loans_no_out = loans        # NOT SURE THIS IS WORKING RIGHT. CONFUSION OVER RETURN STATEMENTS, ETC.  
 
     # Remove outliers
