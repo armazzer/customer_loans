@@ -30,9 +30,14 @@ These are the working files.
     * Defines functions to remove outliers from either a copy of the data or the original data. 
     * Defines a function to drop collinear columns from the dataframe.
 
+* **dataframetransform_2.py**
+    * This is a copy of dataframetransform.py in which some of the imputation methods used to handle missing values are altered. This was done to see if there was an impact on the analysis and visualisation section.
+    * In the end this file is not used, but shows alternative imputations for funded_amount and term_months columns. 
+
 * **load_and_transform.py**
     * Imports data from dataframetransform.py. The imported data has had data types corrected and missing values removed or imputed. 
-    * Runs functions to transform skewed columns, remove outliers and drop collinear columns. 
+    * Runs functions to transform skewed columns, remove outliers and drop collinear columns.
+    * In the end this file is not used, because for the analysis and visualisation section the untransformed data is required.  
 
 ## Jupyter notebook files
 
@@ -66,6 +71,13 @@ These are the exploration and development files.
     * Additional tranformations are applied to reduce skew in selected columns, using functions from dataframetransform.py.
     * The data is reviewed for outliers, and outlier removal is tested. Skew is also cheked, because outlier removal methods are applied only to relatively non-skewed columns. 
     * Collinearity is reviewed. 
+
+* **eda_part_1.ipynb**
+    * Summarises the steps performed to load and transform the data, including skew-reduction transformations, dropping outliers and dropping collinear columns. 
+
+* **analysis_and_visualisation**
+    * Imports data from dataframetransform.py. 
+    * Works through milestones 1 - 4 to analyse the data and perform calculations. 
 
 
 
