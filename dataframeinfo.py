@@ -20,7 +20,7 @@ class DataFrameInfo():
          print("Column                Missing values \n", missing_count_only)
 
     def value_counts_pct(self, column):
-        pd.set_option("display.precision", 2)
+        pd.set_option("display.precision", 3)
         pct_value_counts = self.data[column].value_counts()/len(self.data[column].dropna()) * 100
         print("Value              Count(%) \n", pct_value_counts)
 
