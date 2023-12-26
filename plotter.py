@@ -98,7 +98,7 @@ class Plotter:
         fig.tight_layout()
 
     def dual_prob_plot(self, col_x, col_cat, marginal="box", barnorm="fraction", w=500, h=500):
-        fig = px.histogram(self.data, x=col_x, color=col_cat, marginal=marginal, barnorm=barnorm, title='Probability Bar Plots', width=w, height=h)
+        fig = px.histogram(self.data, x=col_x, color=col_cat, marginal=marginal, barnorm=barnorm, width=w, height=h)
         fig.show()
 
     def bar_plot_twin_y(self, column_a, column_b, y_left, y_right, w, h):
