@@ -1,9 +1,54 @@
-<mxfile host="app.diagrams.net" modified="2023-12-27T22:29:39.492Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" version="22.1.15" etag="J0tDv3oeWyScNTlNwN_4" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-27T22:55:57.994Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="OrccVzO3RuziLUwMQA2U" version="22.1.15" type="github">
   <diagram name="Page-1" id="wHPyczmktxyYoFRpz2Um">
-    <mxGraphModel>
+    <mxGraphModel dx="1892" dy="1180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="OPZGCtS2TfBDVceixeIc-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1060" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-5" target="OPZGCtS2TfBDVceixeIc-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-5" value="db_utils.py" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-6" target="OPZGCtS2TfBDVceixeIc-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-6" value="load_data.py" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="240" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-7" value="transformed_data.py" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="360" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-8" value="dataframeinfo.py" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="520" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-11" value="plotter.py" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="640" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-12" value="dataframetransform.py" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="480" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-13" value="review_data.ipynb" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="435" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-14" value="load_and_transform.py" style="rounded=0;html=1;align=center;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="270" y="760" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-15" target="OPZGCtS2TfBDVceixeIc-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-15" value="loan_payments.csv" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="120" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-16" target="OPZGCtS2TfBDVceixeIc-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-16" value="credentials.yaml" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
