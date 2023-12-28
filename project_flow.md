@@ -1,5 +1,7 @@
 # File layout
 
+Files of each type are shown in order of use. The compiled order switches between types. A diagram can be seen in loans_project_file_layout.drawio, or by following [link](https://app.diagrams.net/?src=about#Harmazzer%2Fcustomer_loans%2Fmain%2Floans_project_file_layout.drawio)
+
 ## Python files
 
 These are the working files. 
@@ -69,15 +71,21 @@ These are the exploration and development files.
 * **outlier_review.ipynb**
     * Imports data from dataframetransform.py. 
     * Additional tranformations are applied to reduce skew in selected columns, using functions from dataframetransform.py.
-    * The data is reviewed for outliers, and outlier removal is tested. Skew is also cheked, because outlier removal methods are applied only to relatively non-skewed columns. 
+    * The data is reviewed for outliers, and outlier removal is tested. Skew is also checked, because outlier removal methods are applied only to relatively non-skewed columns. 
     * Collinearity is reviewed. 
 
 * **eda_part_1.ipynb**
     * Summarises the steps performed to load and transform the data, including skew-reduction transformations, dropping outliers and dropping collinear columns. 
 
-* **analysis_and_visualisation**
+* **analysis_and_visualisation_part_A.ipynb**
     * Imports data from dataframetransform.py. 
-    * Works through milestones 1 - 4 to analyse the data and perform calculations. 
+    * Works through Tasks 1 - 2 (project milestone 4) to visualise the data and perform calculations. 
+
+* **analysis_and_visualisation_part_B.ipynb**
+    * Imports data from dataframetransform.py. 
+    * Works through Tasks 3 - 5 (project milestone 4) to visualise the data and perform calculations. 
+
+
 
 
 
