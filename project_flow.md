@@ -1,6 +1,12 @@
 # File layout
 
-Files of each type are shown in order of use. The compiled order switches between types. A diagram can be seen in loans_project_file_layout.drawio, or by following [link](https://app.diagrams.net/?src=about#Harmazzer%2Fcustomer_loans%2Fmain%2Floans_project_file_layout.drawio)
+The below digram illustrates the relationships between different python and notebook files in the project folder. There is also a yaml file. File descriptions are given below this diagram.\
+\
+![file_layout_diagram.png](file_layout_diagram.png)\
+ \
+ A higher resolution image can be seen by opening file_layout_diagram.drawio in the diagrams.net web app: [app.diagrams.net](https://app.diagrams.net/?src=about).
+
+In the following sections, files of each type are shown in order of use. The compiled order switches between types, as seen in the above diagram.
 
 ## Python files
 
