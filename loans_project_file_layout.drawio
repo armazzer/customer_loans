@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-28T00:26:45.518Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="1PeVNrhFUqqy0OJjjPHm" version="22.1.15" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-28T00:35:01.842Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="3roc2jSVejAGtbFdZZdh" version="22.1.15" type="github">
   <diagram name="Page-1" id="wHPyczmktxyYoFRpz2Um">
     <mxGraphModel dx="1065" dy="1180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -93,6 +93,9 @@
         <mxCell id="OPZGCtS2TfBDVceixeIc-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-12" target="OPZGCtS2TfBDVceixeIc-40">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-91" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-12" target="OPZGCtS2TfBDVceixeIc-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="OPZGCtS2TfBDVceixeIc-12" value="dataframetransform.py" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" vertex="1" parent="1">
           <mxGeometry x="120.75" y="583" width="160" height="80" as="geometry" />
         </mxCell>
@@ -100,7 +103,7 @@
           <mxGeometry x="437.5" y="60" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="OPZGCtS2TfBDVceixeIc-14" value="load_and_transform.py" style="rounded=0;html=1;align=center;whiteSpace=wrap;fillColor=#bac8d3;strokeColor=#23445d;" vertex="1" parent="1">
-          <mxGeometry x="10" y="876.5" width="140" height="80" as="geometry" />
+          <mxGeometry x="23" y="876.5" width="130" height="80" as="geometry" />
         </mxCell>
         <mxCell id="OPZGCtS2TfBDVceixeIc-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-15" target="OPZGCtS2TfBDVceixeIc-6">
           <mxGeometry relative="1" as="geometry" />
@@ -130,7 +133,7 @@
         <mxCell id="OPZGCtS2TfBDVceixeIc-40" value="skew_review.ipynb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
           <mxGeometry x="384.5" y="643" width="160" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="OPZGCtS2TfBDVceixeIc-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-41" target="OPZGCtS2TfBDVceixeIc-11">
+        <mxCell id="OPZGCtS2TfBDVceixeIc-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-41" target="OPZGCtS2TfBDVceixeIc-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="OPZGCtS2TfBDVceixeIc-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-41" target="OPZGCtS2TfBDVceixeIc-12">
@@ -148,7 +151,7 @@
         <mxCell id="OPZGCtS2TfBDVceixeIc-67" value="eda_part_1.ipynb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad9d5;strokeColor=#ae4132;" vertex="1" parent="1">
           <mxGeometry x="385.62" y="890" width="156.25" height="53" as="geometry" />
         </mxCell>
-        <mxCell id="OPZGCtS2TfBDVceixeIc-72" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-26">
+        <mxCell id="OPZGCtS2TfBDVceixeIc-72" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-26" target="OPZGCtS2TfBDVceixeIc-8">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="548" y="380" as="sourcePoint" />
             <mxPoint x="762" y="520" as="targetPoint" />
@@ -164,10 +167,20 @@
         <mxCell id="OPZGCtS2TfBDVceixeIc-89" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-8" target="OPZGCtS2TfBDVceixeIc-81">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OPZGCtS2TfBDVceixeIc-8" value="dataframeinfo.py" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="707" y="490" width="110" height="80" as="geometry" />
+        <mxCell id="OPZGCtS2TfBDVceixeIc-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-8" target="OPZGCtS2TfBDVceixeIc-41">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OPZGCtS2TfBDVceixeIc-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=-0.009;entryY=0.15;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-40" target="OPZGCtS2TfBDVceixeIc-11">
+        <mxCell id="OPZGCtS2TfBDVceixeIc-95" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-8" target="OPZGCtS2TfBDVceixeIc-40">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="505" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-8" value="dataframeinfo.py" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="707" y="500" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OPZGCtS2TfBDVceixeIc-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=-0.009;entryY=0.15;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="1" source="OPZGCtS2TfBDVceixeIc-40" target="OPZGCtS2TfBDVceixeIc-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="OPZGCtS2TfBDVceixeIc-76" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Solid line arrows indicate imports/exports. Dashed line arrows indicate one file informing another. Not every &quot;inform&quot; relationship is shown.&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
