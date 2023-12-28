@@ -12,7 +12,7 @@
 
 
 # Project Description
-In this project, a connection to an RDS database is established, and the table loan_payments is retrieved and saved to a csv file. The data is then loaded from the csv file into a pandas dataframe and several data conversion, cleaning and transformation steps are performed. Jupyter notebook files are used to evaluate the data and develop initial methods and approaches. These methods are then written into python files, which serve as the working modules in the project. Several classes are defined in these modules to support the data anlysis and transformation processes.
+In this project, a connection to an RDS database is established, and the table loan_payments is retrieved and saved to a csv file. The data is then loaded from the csv file into a pandas dataframe and several data conversion, cleaning and transformation steps are performed. Jupyter notebook files are used to evaluate the data and develop initial methods and approaches. These methods are then written into python files, which serve as the working modules in the project. Several classes are defined in these modules to support the data analysis and transformation processes.
 
 In the second part of the project, the untransformed data (only data type conversion and missing data cleanup are performed) is analysed to draw further insights. The analyses are performed in two jupyter notebook files, which utilise the python modules that were developed. 
 
