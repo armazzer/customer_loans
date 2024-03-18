@@ -19,7 +19,7 @@ In the second part of the project, the untransformed data (only data type conver
 # File structure
 
 ## Layout diagram
-The below digram illustrates the relationships between different python and notebook files in the project folder. There is also a yaml file. File descriptions are given below this diagram.\
+The below digram illustrates the relationships between different python and notebook files in the project folder. Python files are located in the python_modules package, and there is also a yaml file stored locally. File descriptions are given below this diagram.\
 \
 ![file_layout_diagram.png](diagrams_and_info/file_layout_diagram.png)\
  \
@@ -29,7 +29,7 @@ In the following sections, files of each type are shown in order of use. The com
 
 ## Python files
 
-These are the working files. 
+These are the working modules. 
 
 * **db_utils.py** 
     * Connects to RDS database, extract the data and saves it to a csv file, loan_payments.csv.
@@ -63,12 +63,12 @@ These are the working files.
 
 * **load_and_transform.py**
     * Imports data from dataframetransform.py. The imported data has had data types corrected and missing values removed or imputed. 
-    * Runs functions to transform skewed columns, remove outliers and drop collinear columns.
-    * In the end this file is not used, because for the analysis and visualisation section the untransformed data is required.  
+    * Runs functions to transform skewed columns, remove outliers and drop collinear columns, 
+    * In the end this file is not carried forward, because for the analysis and visualisation section the untransformed data is required. The file serves to demonstrate the full data extraction, transformation and cleaning process. 
 
 ## Jupyter notebook files
 
-These are the exploration and development files.
+These are the development, exploration and analysis files.
 
 * **review_data.ipynb**
     * Simple review of initial data. The data is loaded from loan_payments.csv into a pandas dataframe for review. 
@@ -100,7 +100,7 @@ These are the exploration and development files.
     * Collinearity is reviewed. 
 
 * **eda_part_1.ipynb**
-    * Summarises the steps performed to load and transform the data, including skew-reduction transformations, dropping outliers and dropping collinear columns. 
+    * Summarises the steps performed to load and transform the data, including skew-reduction transformations, dropping outliers and dropping collinear columns. This is the notebook equivalent of load_and_transform.py, with visualisations.
 
 * **analysis_and_visualisation_part_A.ipynb**
     * Imports data from dataframetransform.py. 
