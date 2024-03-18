@@ -21,9 +21,9 @@ In the second part of the project, the untransformed data (only data type conver
 ## Layout diagram
 The below digram illustrates the relationships between different python and notebook files in the project folder. There is also a yaml file. File descriptions are given below this diagram.\
 \
-![file_layout_diagram.png](file_layout_diagram.png)\
+![file_layout_diagram.png](diagrams_and_info/file_layout_diagram.png)\
  \
- A higher resolution image can be seen by opening file_layout_diagram.drawio in the diagrams.net web app: [app.diagrams.net](https://app.diagrams.net/?src=about).
+ A higher resolution image can be seen by opening file_layout_diagram.drawio (located in diagrams_and_info) in the diagrams.net web app: [app.diagrams.net](https://app.diagrams.net/?src=about).
 
 In the following sections, files of each type are shown in order of use. The compiled order switches between types, as seen in the above diagram.
 
